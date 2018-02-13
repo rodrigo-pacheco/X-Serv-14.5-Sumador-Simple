@@ -8,7 +8,7 @@ SAT subject (Universidad Rey Juan Carlos)
 """
 
 import socket
-import random
+import calculadora
 
 # Create a TCP objet socket and bind it to a port
 # Port should be 80, but since it needs root privileges,
@@ -31,15 +31,17 @@ try:
         print('Waiting for connections')
         (recvSocket, address) = mySocket.accept()
         print('Request received:')
-        print(recvSocket.recv(2048))
         print('Answering back...')
 
-        rnd_num = random.randint(1, 9999999)
+        received = str(recvSocket.recv(2048))
+        info = str(received.split()[1])
+        _, op1, operation, op2 = info.split("/")
+        print(op1, operation, op2)
 
         recvSocket.send(bytes(
                         "HTTP/1.1 200 OK\r\n\r\n" +
                         "<html><body><h1>Hola!</h1>" +
-                        "<a href=" + str(rnd_num) + ">Dame otra</a>" +
+                        "<a href=" + str(7) + ">Dame otra</a>" +
                         "</body></html>" +
                         "\r\n", "utf-8"))
         recvSocket.close()
