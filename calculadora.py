@@ -34,7 +34,7 @@ def calcula(param):
     except ValueError:
         return("Valor introducido erróneo. Debe ser número")
 
-if __name__ == __main__:
+if __name__ == "__main__":
     param = sys.argv
 
     print("\nUso: python3 calculadora.py 'opción' valor1 valor2\n\n",
