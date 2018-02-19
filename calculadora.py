@@ -19,12 +19,12 @@ operaciones = {'suma': operator.add,
                'divide': operator.truediv}
 
 def calcula(param):
-    if param != NUM_ARGS:
+    if len(param) != NUM_ARGS:
         sys.exit("Usage error: [operator] [number1] [number2]")
 
     try:
         resultado = operaciones[param[1]](float(param[2]), float(param[3]))
-        return("Resultado: ", resultado)
+        return("Resultado: " + str(resultado))
     except IndexError:
         return("Usage error: [operator] [number1] [number2]")
     except KeyError:

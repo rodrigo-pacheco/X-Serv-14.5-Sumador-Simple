@@ -36,12 +36,16 @@ try:
         received = str(recvSocket.recv(2048))
         info = str(received.split()[1])
         _, op1, operation, op2 = info.split("/")
-        print(op1, operation, op2)
+
+        try:
+            answer = calculadora.operaciones[operation](int(op1), int(op2))
+        except KeyError:
+            answer = 'Opción no encontrada. Pruebe: suma, resta, multiplica o divide'
 
         recvSocket.send(bytes(
                         "HTTP/1.1 200 OK\r\n\r\n" +
-                        "<html><body><h1>Hola!</h1>" +
-                        "<a href=" + str(7) + ">Dame otra</a>" +
+                        "<html><body>" +
+                        answer +
                         "</body></html>" +
                         "\r\n", "utf-8"))
         recvSocket.close()
