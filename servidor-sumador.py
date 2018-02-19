@@ -41,8 +41,8 @@ try:
 
             answer = calculadora.calcula(param)
         except:
-            answer = ("Usage error: /number/operation/number."+
-                     "\nOperations: suma, resta, multiplica, divide")
+            answer = ("<p>Usage error: /number/operation/number.</p>"+
+                      "<p>Operations: suma, resta, multiplica, divide</p>")
 
         recvSocket.send(bytes(
                         "HTTP/1.1 200 OK\r\n\r\n" +
