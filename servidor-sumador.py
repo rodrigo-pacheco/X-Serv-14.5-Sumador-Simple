@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Simple HTTP Server: serves random URLs usign a hyperlink
+Calculator HTTP Server: serves basic calculations
 
 Rodrigo Pacheco Martinez-Atienza
 r.pachecom @ gsyc.es
@@ -33,18 +33,20 @@ try:
         print('Request received:')
         print('Answering back...')
 
-        received = str(recvSocket.recv(2048))
-        info = str(received.split()[1])
-        _, op1, operation, op2 = info.split("/")
-
         try:
-            answer = calculadora.operaciones[operation](int(op1), int(op2))
-        except KeyError:
-            answer = 'Opción no encontrada. Pruebe: suma, resta, multiplica o divide'
+            received = str(recvSocket.recv(2048), 'utf-8')
+            info = str(received.split()[1])
+            _, op1, operation, op2 = info.split("/")
+            param = [_, operation, int(op1), int(op2)] #First value left blanc due to calculadora specifications
+
+            answer = calculadora.calcula(param)
+        except:
+            answer = ("Usage error: /number/operation/number."+
+                     "\nOperations: suma, resta, multiplica, divide")
 
         recvSocket.send(bytes(
                         "HTTP/1.1 200 OK\r\n\r\n" +
-                        "<html><body>" +
+                        "<html><body><h1>Bienvenido a Calculadora Online</h1>" +
                         answer +
                         "</body></html>" +
                         "\r\n", "utf-8"))
