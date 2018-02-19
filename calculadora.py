@@ -26,13 +26,13 @@ def calcula(param):
         resultado = operaciones[param[1]](float(param[2]), float(param[3]))
         return("Resultado: " + str(resultado))
     except IndexError:
-        return("Usage error: [operator] [number1] [number2]")
+        sys.exit("Usage error: [operator] [number1] [number2]")
     except KeyError:
-        return("Opción no soportada")
+        sys.exit("Opción no soportada. Usage: [operator] [number1] [number2]")
     except ZeroDivisionError:
-        return("División por 0. Resultado es 0")
+        return("División por 0. Ten cuidado, el mundo podría haber explotado ;)")
     except ValueError:
-        return("Valor introducido erróneo. Debe ser número")
+        sys.exit("Valor introducido erróneo. Debe ser número")
 
 if __name__ == "__main__":
     param = sys.argv
